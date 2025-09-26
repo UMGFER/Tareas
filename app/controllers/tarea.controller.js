@@ -23,7 +23,7 @@ exports.create = (req, res) => {
         fechaFin: req.body.fechaFin,
         fechaLimite: req.body.fechaLimite,
         // utilizando ? nos ayuda a indicar que el paramatro puede ser opcional dado que si no viene, le podemos asignar un valor default
-        estado: req.body.estado ? req.body.estado : false
+        estado: req.body.estado,
     };
 
     // Save a new MUSIC into the database
@@ -140,7 +140,7 @@ exports.deleteAll = (req, res) => {
 
 // find all active music, basado en el atributo status vamos a buscar que solo los clientes activos
 exports.findAllStatus = (req, res) => {
-    Tarea.findAll({ where: { estado: true } })
+    Tarea.findAll({ where: { estados: true } })
         .then(data => {
             res.send(data);
         })
