@@ -2,36 +2,33 @@
 module.exports = (sequelize, Sequelize) => {
 // usamos el sequelize.defina para "definir" el nombre de la entity en la BD, en este caso "cliente"
 // Usamos type.Sequelize para definir el tipo de datos de cada atributo de la entidad 
-    const Prueba = sequelize.define("pruebas", {
-        id_prueba: {
+    const Tarea = sequelize.define("tareas", {
+        id_tarea: {
             type: Sequelize.INTEGER,
             primaryKey: true,
             autoIncrement: true
         },
-        nombre: {
+        titulo: {
             type: Sequelize.STRING
         },
-        apellido: {
+        descripcion: {
             type: Sequelize.STRING
         },
-        departamento: {
+        responsable: {
             type: Sequelize.STRING
         },
-        salario: {
-            type: Sequelize.INTEGER
+        fechaInicio: {
+            type: Sequelize.DATE
         },
-        dpi: {
-            type: Sequelize.STRING
+        fechaFin: {
+            type: Sequelize.DATE
         },
-        genero: {
-            type: Sequelize.STRING
-        },
-        fecha: {
+        fechaLimite: {
             type: Sequelize.DATE
         },
         estado: {
-            type: Sequelize.BOOLEAN
+            type: Sequelize.STRING
         },
     });
-    return Prueba;
+    return Tarea;
 };

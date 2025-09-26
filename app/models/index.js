@@ -28,14 +28,7 @@ const db = {};
 db.Sequelize = Sequelize;
 // se define una variable con la configuracion de sequelize
 db.sequelize = sequelize;
-const prueba = require("./prueba.model.js")(sequelize, Sequelize);
-const pruebas =require("./pruebas.model.js")(sequelize,Sequelize);
 
-db.prueba = prueba;
-db.pruebas = pruebas;
-
-prueba.hasOne(pruebas,{foreignKey:"id_prueba",onDelete:"RESTRICT"});
-pruebas.belongsTo(prueba,{foreignKey:"id_prueba"});
-
+db.tareas =  require("./tarea.model.js")(sequelize,Sequelize);
 
 module.exports = db;

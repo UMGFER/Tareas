@@ -1,12 +1,12 @@
 // importamos db los modelos en este caso si tenemos uno o mas, se puede referenciar db."nombreModelo".   
 const db = require("../models");
-const Prueba = db.prueba;
+const Tarea = db.tarea;
 const Op = db.Sequelize.Op;
 
 // Create and Save a new student
 exports.create = (req, res) => {
     // Validamos que dentro del  request no venga vacio el nombre, de lo contrario returna error
-    if (!req.body.nombre) {
+    if (!req.body.titulo) {
         res.status(400).send({
             message: "Content can not be empty!"
         });
@@ -14,21 +14,20 @@ exports.create = (req, res) => {
     }
 
     // Create a MUSIC, definiendo una variable con la estructura del reques para luego solo ser enviada como parametro mas adelante. 
-    const prueba = {
-        id_prueba: req.body.id_prueba,
-        nombre: req.body.nombre,
-        apellido: req.body.apellido,
-        departamento: req.body.departamento,
-        salario: req.body.salario,
-        dpi: req.body.dpi,
-        genero: req.body.genero,
-        fecha: req.body.fecha,
+    const tarea = {
+        id_tarea: req.body.id_tarea,
+        titulo: req.body.titulo,
+        descripcion: req.body.descripcion,
+        responsable: req.body.responsable,
+        fechaInicio: req.body.fechaInicio,
+        fechaFin: req.body.fechaFin,
+        fechaLimite: req.body.fechaLimite,
         // utilizando ? nos ayuda a indicar que el paramatro puede ser opcional dado que si no viene, le podemos asignar un valor default
         estado: req.body.estado ? req.body.estado : false
     };
 
     // Save a new MUSIC into the database
-    Prueba.create(prueba)
+    Tarea.create(tarea)
         .then(data => {
             res.send(data);
         })
@@ -42,10 +41,10 @@ exports.create = (req, res) => {
 
 // Retrieve all music from the database.
 exports.findAll = (req, res) => {
-    const nombre = req.query.nombre;
-    var condition = nombre ? { nombre: { [Op.iLike]: `%${nombre}%` } } : null;
+    const titulo = req.query.nombre;
+    var condition = titulo ? { titulo: { [Op.iLike]: `%${titulo}%` } } : null;
 
-    Prueba.findAll({ where: condition })
+    Tarea.findAll({ where: condition })
         .then(data => {
             res.send(data);
         })
@@ -61,7 +60,7 @@ exports.findAll = (req, res) => {
 exports.findOne = (req, res) => {
     const id = req.params.id;
 
-    Prueba.findByPk(id)
+    Tarea.findByPk(id)
         .then(data => {
             res.send(data);
         })
@@ -76,7 +75,7 @@ exports.findOne = (req, res) => {
 exports.update = (req, res) => {
     const id = req.params.id;
 
-    Prueba.update(req.body, {
+    Tarea.update(req.body, {
         where: { id: id }
     })
         .then(num => {
@@ -101,7 +100,7 @@ exports.update = (req, res) => {
 exports.delete = (req, res) => {
     const id = req.params.id;
     // utilizamos el metodo destroy para eliminar el objeto mandamos la condicionante where id = parametro que recibimos 
-    Prueba.destroy({
+    Tarea.destroy({
         where: { id: id }
     })
         .then(num => {
@@ -124,7 +123,7 @@ exports.delete = (req, res) => {
 
 // Delete all music from the database.
 exports.deleteAll = (req, res) => {
-    Prueba.destroy({
+    Tarea.destroy({
         where: {},
         truncate: false
     })
@@ -141,7 +140,7 @@ exports.deleteAll = (req, res) => {
 
 // find all active music, basado en el atributo status vamos a buscar que solo los clientes activos
 exports.findAllStatus = (req, res) => {
-    Prueba.findAll({ where: { estado: true } })
+    Tarea.findAll({ where: { estado: true } })
         .then(data => {
             res.send(data);
         })
