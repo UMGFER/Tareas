@@ -17,5 +17,5 @@ module.exports = app => {
     router.delete("/delete/", tarea.deleteAll);
     // Podemos utilizar como una ocpion app.use("EndPoint",router" para simplicar el URI
     // Ej.  http://localhost:Puerto/api/spotify/
-    app.use("/api/tarea", router);
+    app.use("/api/tareas", router);
 };
