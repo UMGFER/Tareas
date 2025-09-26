@@ -73,10 +73,10 @@ exports.findOne = (req, res) => {
 
 // Update a Tutorial by the id in the request
 exports.update = (req, res) => {
-    const id = req.params.id;
+    const id_tarea = req.params.id_tarea;
 
     Tarea.update(req.body, {
-        where: { id: id }
+        where: { id_tarea: id_tarea }
     })
         .then(num => {
             if (num == 1) {
@@ -98,10 +98,10 @@ exports.update = (req, res) => {
 
 // Delete a music with the specified id in the request
 exports.delete = (req, res) => {
-    const id = req.params.id;
+    const id_tarea = req.params.id_tarea;
     // utilizamos el metodo destroy para eliminar el objeto mandamos la condicionante where id = parametro que recibimos 
     Tarea.destroy({
-        where: { id: id }
+        where: { id_tarea: id_tarea }
     })
         .then(num => {
             if (num == 1) {
