@@ -1,6 +1,6 @@
 // importamos db los modelos en este caso si tenemos uno o mas, se puede referenciar db."nombreModelo".   
 const db = require("../models");
-const Tarea = db.tarea;
+const Tarea = db.tareas;
 const Op = db.Sequelize.Op;
 
 // Create and Save a new student
@@ -14,7 +14,7 @@ exports.create = (req, res) => {
     }
 
     // Create a MUSIC, definiendo una variable con la estructura del reques para luego solo ser enviada como parametro mas adelante. 
-    const tarea = {
+    const tareas = {
         id_tarea: req.body.id_tarea,
         titulo: req.body.titulo,
         descripcion: req.body.descripcion,
@@ -27,7 +27,7 @@ exports.create = (req, res) => {
     };
 
     // Save a new MUSIC into the database
-    Tarea.create(tarea)
+    Tarea.create(tareas)
         .then(data => {
             res.send(data);
         })
